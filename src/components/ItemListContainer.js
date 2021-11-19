@@ -1,10 +1,12 @@
-const ItemListContainer = ({greeting}) => {
-console.log("soy una props de ILC",greeting)
-    return (
-        <>
-    <h2>  </h2>
-    <h3>{greeting}</h3>
+import ItemCount from "./ItemCount";
+
+const ItemListContainer = ({ greeting }) => {
+  return (
+    <>
+      <h2>Soy el ItemListContainer</h2>
+      <h3>{greeting}</h3>
+      <ItemCount stock={5} initial={1} />
     </>
-    )
+  );
 };
-export default ItemListContainer
+export default ItemListContainer;
