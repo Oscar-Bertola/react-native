@@ -1,37 +1,20 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
+import getProducts from "../Services/handMadePromise";
+import { useParams } from "react-router-dom";
 import ItemDetail from "./ItemDetail";
-const productosEj = {
-"id":10,
-"name":"remera lisa",
-"description": "variedad de colores, tela de primera calidad",
-"image":" https://www.remerasya.com/pub/media/catalog/product/cache/ecd051e9670bd57df35c8f0b122d8aea/r/e/remera_negra_lisa_1.jpg "
-
-
-};
-
 
 const ItemDetailContainer = () => {
+  const [item, setItem] = useState({});
+  console.log("item", item);
+  const { id } = useParams();
+  console.log("Id de useParams", id);
+  console.log("Tipo de Dato ID", typeof id);
 
-const [product, setProducts] useState({})
-
-useEffect (() => {
-setTimeout((setProducts(productosEj)), 2000)
-console.log(product)
-
-},[])
-
-
-return(
-
-    <>
-    <h3> Soy ItemDetailContainer</h3>
-    <ItemDetail
-    product={product}
-    />
-    </>
-)
-
-}
-export default ItemDetailContainer
-
-
+  useEffect(() => {
+    getProducts.then((res) => {
+      setItem(res.find((prod) => prod.id === parseInt(id)));
+    });
+  }, [id]);
+  return <ItemDetail item={item} />;
+};
+export default ItemDetailContainer;
