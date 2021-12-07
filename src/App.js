@@ -1,19 +1,43 @@
+
+import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css";
-import ItemListContainer from "./components/ItemListContainer";
-import NavBar from "./components/NavBar";
-import About from "./components/About";
-import { Routes, Route } from "react-router-dom";
-import ItemDetailContainer from "./components/ItemDetailContainer";
+import NavBar from "../src/Components/NavBar/navBar"
+import ItemListContainer from './Components/ItemListContainer/ItemListContainer';
+import ItemDetailContainer from './Components/ItemDetailContainer/ItemDetailContainer';
+import {
+  BrowserRouter,
+  Routes,
+  Route
+} from "react-router-dom";
+import Contact from './pages/contact';
+import PaymentMethods from "./pages/PaymentMethods";
+import Shipping from "./pages/Shipping";
+import Cart from './Components/CartWidget/Cart';
+import CartProvider from './Context/CartContext';
+
 
 function App() {
+  
   return (
     <div className="App">
+      <CartProvider>
+      <BrowserRouter>
       <NavBar />
       <Routes>
-        <Route path="/" element={<ItemListContainer greeting="Hola User" />} />
-        <Route path="item/:id" element={<ItemDetailContainer />} />
-        <Route path="about" element={<About />} />
+
+      <Route path="/" element={<ItemListContainer color="#fb9a93" greeting="Productos Disponibles" />} />
+      <Route path="/category" element={<ItemListContainer/>} />
+      <Route path="/category/:catId" element={<ItemListContainer/>} />
+      <Route path="/product/:itemId" element={<ItemDetailContainer/>} />
+      <Route path="/shipping" element={<Shipping />} />
+      <Route path="/payment" element={<PaymentMethods />} />
+      <Route path="/contact" element={<Contact />} />
+      <Route path="/cart" element={<Cart/>}/>
+      <Route path="*" element={ <h1>404 - Página no encontrada</h1> } />
       </Routes>
+      </BrowserRouter>
+      </CartProvider>
+      
     </div>
   );
 }
