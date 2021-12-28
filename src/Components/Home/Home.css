@@ -1,0 +1,12 @@
+.carga {
+  text-align: center;
+}
+.title {
+  padding: 2rem;
+  min-height: 30vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}

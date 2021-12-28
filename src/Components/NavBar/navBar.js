@@ -1,61 +1,34 @@
-import CartWidget from "../CartWidget/CartWidget";
+import React from "react";
+import { NavLink, Link } from "react-router-dom";
+import logo from "./logo.png";
 import "./NavBar.css";
-import React, { Component } from 'react'
+import CartIcon from "../CartIcon/CartIcon.js";
 
-import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
-import { Link } from "react-router-dom";
+const NavBar = () => {
+  return (
+    <header className="main-head">
+      <nav>
+        <CartIcon />
+        <div className="logo">
+          <img src={logo} alt="" />
+          <h1>Player Store</h1>
+        </div>
+        <ul>
+          <li>
+            <NavLink to={"/"} activeClassName="">
+              Home
+            </NavLink>
+          </li>
+          <li>
+            <Link to={"/cart"}>Carrito</Link>
+          </li>
+          <li>
+            <NavLink to={"/contacto"}>Contacto</NavLink>
+          </li>
+        </ul>
+      </nav>
+    </header>
+  );
+};
 
-function NavBar() {
-    return (
-      <Navbar className="navbar-container navbar"  expand="lg">
-        <Container>
-          <Navbar.Brand as={Link} to="/">
-            <h1 className= "logo">Style Rosso</h1>
-          </Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="mx-auto">
-              <Nav.Link as={Link} to={"/"}>
-                  
-                Inicio
-              </Nav.Link>
-              <NavDropdown className= "opciones" title="Categorías" id="basic-nav-dropdown"  >
-                <NavDropdown.Item as={Link} to="/category">
-                  
-                  Todos los productos
-                </NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item as={Link} to="/category/celular">
-            Remeras
-                </NavDropdown.Item>
-                <NavDropdown.Item as={Link} to="/category/Otros">
-                    Accesorios
-
-                    </NavDropdown.Item>
-                
-              </NavDropdown>
-              
-              <Nav.Link as={Link} to="/shipping">
-                  
-                Envios
-              </Nav.Link>
-              <Nav.Link as={Link} to="/payment">
-                  
-                Medios de pago
-                
-              </Nav.Link>
-              <Nav.Link as={Link} to="/contact">
-                 
-                Contactanos
-              </Nav.Link>
-            </Nav>
-            <Nav.Link as={Link} to="/cart">
-            <CartWidget />
-            </Nav.Link>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
-    );
-  }
-  export default NavBar;
-  
+export default NavBar;

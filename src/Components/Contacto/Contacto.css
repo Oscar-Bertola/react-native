@@ -1,0 +1,44 @@
+#contact {
+  min-height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: red;
+}
+.form-wrapper {
+  background: black;
+  width: 60%;
+  color:red;
+  border-radius: 20px ;
+  border: solid 2px white;
+}
+.form-head {
+  text-align: center;
+  padding: 3rem;
+  
+}
+.name-form,
+.email-form {
+  text-align: center;
+  padding: 2rem;
+}
+.form-wrapper label {
+  margin: 0rem 2rem;
+}
+.form-wrapper input {
+  padding: 1rem 3rem;
+}
+.form-wrapper button {
+  width: 100%;
+  padding: 2rem;
+  margin-top: 8rem;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  
+}
+.name-form{
+  color: white;
+}
+.email-form{
+  color: white;
+}

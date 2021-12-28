@@ -1,46 +1,34 @@
-import React, { Fragment, useEffect, useState } from "react";
-import ItemDetail from "./ItemDetail";
-import { useParams } from "react-router";
-import { products } from "../Products";
-import Spinner from "../Spinner/spinner";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import "./ItemDetailContainer.css";
+import ItemDetail from "../ItemDetail/ItemDetail";
+import { getFirestore } from "../../firebase/firebase";
 
+export default function ItemDetailContainer() {
+  const [loading, setLoading] = useState(true);
+  const [detail, setDetail] = useState({});
+  const { id } = useParams();
 
-const ItemDetailContainer = () => {
-  const [items, setItems] = useState({});
-  const [loader, setLoader] = useState(false);
-  const { itemId } = useParams();
-  console.log(itemId);
   useEffect(() => {
-    setLoader(true);
-    const promise = new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve(products);
-      }, 2000);
+    setLoading(true);
+    //referencia
+    const db = getFirestore();
+    const itemCollection = db.collection("items");
+    const itemId = itemCollection.doc(id);
+    //pedimos lo datos
+    itemId.get().then((response) => {
+      setDetail(response.data());
+      setLoading(false);
     });
+  }, [id]);
 
-    promise
-      .then((res) => {
-        if (itemId) {
-          const foundItem = res.find((items) => items.id === Number(itemId));
-          
-          if (foundItem) setItems(foundItem); 
-        }
-      })
-      .catch(() => {
-        console.log("Error al cargar");
-      })
-      .finally(() => {
-        setLoader(false)
-      });
-  }, [itemId]);
-
-  return ( loader ? <Spinner/> :
-    <Fragment>
-      
-        <ItemDetail items={items} />
-
-    </Fragment>
+  return (
+    <>
+      {loading ? (
+        <h1 className="carga">Loading...</h1>
+      ) : (
+        <ItemDetail detail={detail} />
+      )}
+    </>
   );
-};
-
-export default ItemDetailContainer;
+}
